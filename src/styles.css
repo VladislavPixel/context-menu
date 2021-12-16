@@ -22,7 +22,6 @@ body {
 	border-radius: 5px;
 	display: none;
 	list-style: none;
-	min-height: 50px;
 }
 
 .menu.open {

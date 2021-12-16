@@ -13,6 +13,6 @@ export class BackgroundModule extends Module {
 		this.element.style.background = this.colors[randomIndex]
 	}
 	toHTML() {
-		super.toHTML()
+		return super.toHTML()
 	}
 }

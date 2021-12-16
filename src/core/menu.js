@@ -3,6 +3,11 @@ export class Menu {
 		this.el = document.querySelector(selector)
 
 		document.body.addEventListener("click", event => {
+			this.arrayChilds.forEach((item, index) => {
+				if (event.target.getAttribute("data-type") === item.type) {
+					this.arrayChilds[index].trigger()
+				}
+			})
 			if (event.target.offsetParent !== this.el) {
 				this.close()
 			}
