@@ -1,5 +1,7 @@
 import './styles.css'
 import { ContextMenu } from "./menu"
+import { random } from "./utils"
+
 
 const menu = new ContextMenu()
 const body = document.querySelector("body")
@@ -15,4 +17,5 @@ body.addEventListener("click", (event) => {
 	if (menu.status === "open" && event.target !== menu.element) {
 		menu.close()
 	}
+	console.log(random(0, 9))
 })

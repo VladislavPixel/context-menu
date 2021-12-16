@@ -1,5 +1,6 @@
 import { Menu } from "./core/menu"
 import { correctPosition } from "./utils"
+import { BackgroundModule } from "./modules/background.module"
 
 export class ContextMenu extends Menu {
 	constructor() {
@@ -19,7 +20,7 @@ export class ContextMenu extends Menu {
 		this.status = "close"
 	}
 	add() {
-		
+		this.element.append(new BackgroundModule("background", "Случайный фон"))
 	}
 }
 
