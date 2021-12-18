@@ -7,7 +7,7 @@ export class RandomSoundModule extends Module {
 	}
 	trigger(target) {
 		target.classList.add("active")
-		const index = Math.abs(random(0, 11))
+		const index = Math.abs(random(0, 10))
 		const audio = new Audio(`./src/music/${index}.mp3`)
 		function endedLogic() {
 			target.classList.remove("active")
