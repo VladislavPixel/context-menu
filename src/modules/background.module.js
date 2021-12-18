@@ -6,7 +6,7 @@ export class BackgroundModule extends Module {
 	constructor(type, text) {
 		super(type, text)
 		this.element = document.querySelector("body")
-		this.colors = configAuxiliary.arrayHex
+		this.colors = configAuxiliary.arrayHexBackground
 	}
 	trigger() {
 		const randomIndex = random(0, this.colors.length)

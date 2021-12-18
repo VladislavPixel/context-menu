@@ -2,10 +2,10 @@ export class Menu {
 	constructor(selector) {
 		this.el = document.querySelector(selector)
 
-		document.body.addEventListener("click", event => {
+		document.body.addEventListener("click", (event) => {
 			this.arrayChilds.forEach((item, index) => {
 				if (event.target.getAttribute("data-type") === item.type) {
-					this.arrayChilds[index].trigger()
+					this.arrayChilds[index].trigger(event.target)
 				}
 			})
 			if (event.target.offsetParent !== this.el) {

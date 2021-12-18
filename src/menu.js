@@ -1,6 +1,10 @@
 import { Menu } from "./core/menu"
 import { correctPosition } from "./utils"
 import { BackgroundModule } from "./modules/background.module"
+import { CounterClicksModule } from "./modules/counterClicks.module"
+import { RandomSoundModule } from "./modules/randomSound.module"
+import { RandomFigureModule } from "./modules/randomFigure.module"
+import { TimerModule } from "./modules/timer.module"
 
 export class ContextMenu extends Menu {
 	constructor(selector) {
@@ -21,9 +25,16 @@ export class ContextMenu extends Menu {
 		this.status = "close"
 	}
 	add() {
-		const backgroundModule = new BackgroundModule("background", "Случайный фон")
-		this.el.insertAdjacentHTML("afterbegin", backgroundModule.toHTML())
-		this.arrayChilds.push(backgroundModule)
+		[
+			new RandomFigureModule("randomFigure", "Случайная фигура"),
+			new BackgroundModule("background", "Случайный фон"),
+			new CounterClicksModule("counterClicks", "Считать клики (за 4 секунды)"),
+			new RandomSoundModule("randomSound", "Рандомный звук"),
+			new TimerModule("timer", "Таймер отсчета")
+		].forEach((customModule) => {
+			this.arrayChilds.push(customModule)
+			this.el.insertAdjacentHTML("afterbegin", customModule.toHTML())
+		})
 	}
 }
 
