@@ -5,6 +5,7 @@ import { CounterClicksModule } from "./modules/counterClicks.module"
 import { RandomSoundModule } from "./modules/randomSound.module"
 import { RandomFigureModule } from "./modules/randomFigure.module"
 import { TimerModule } from "./modules/timer.module"
+import { CustomMessageModule } from "./modules/customMessage.module"
 
 export class ContextMenu extends Menu {
 	constructor(selector) {
@@ -12,6 +13,13 @@ export class ContextMenu extends Menu {
 		this.status = "close"
 		this.arrayChilds = []
 		this.add()
+		document.body.addEventListener("click", (event) => {
+			this.arrayChilds.forEach((item, index) => {
+				if (event.target.getAttribute("data-type") === item.type) {
+					this.arrayChilds[index].trigger(event.target)
+				}
+			})
+		})
 	}
 	open(x, y) {
 		this.el.classList.add("open")
@@ -30,7 +38,8 @@ export class ContextMenu extends Menu {
 			new BackgroundModule("background", "Случайный фон"),
 			new CounterClicksModule("counterClicks", "Считать клики (за 4 секунды)"),
 			new RandomSoundModule("randomSound", "Рандомный звук"),
-			new TimerModule("timer", "Таймер отсчета")
+			new TimerModule("timer", "Таймер отсчета"),
+			new CustomMessageModule("customMessage", "Кастомное сообщение")
 		].forEach((customModule) => {
 			this.arrayChilds.push(customModule)
 			this.el.insertAdjacentHTML("afterbegin", customModule.toHTML())
