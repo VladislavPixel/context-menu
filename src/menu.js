@@ -6,6 +6,7 @@ import { RandomSoundModule } from "./modules/randomSound.module"
 import { RandomFigureModule } from "./modules/randomFigure.module"
 import { TimerModule } from "./modules/timer.module"
 import { CustomMessageModule } from "./modules/customMessage.module"
+import { PaintingModule } from "./modules/painting.module"
 
 export class ContextMenu extends Menu {
 	constructor(selector) {
@@ -39,7 +40,8 @@ export class ContextMenu extends Menu {
 			new CounterClicksModule("counterClicks", "Считать клики (за 4 секунды)"),
 			new RandomSoundModule("randomSound", "Рандомный звук"),
 			new TimerModule("timer", "Таймер отсчета"),
-			new CustomMessageModule("customMessage", "Кастомное сообщение")
+			new CustomMessageModule("customMessage", "Кастомное сообщение"),
+			new PaintingModule("modePainting", "Режим рисования")
 		].forEach((customModule) => {
 			this.arrayChilds.push(customModule)
 			this.el.insertAdjacentHTML("afterbegin", customModule.toHTML())

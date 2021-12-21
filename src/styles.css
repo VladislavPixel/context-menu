@@ -42,7 +42,7 @@ body{
 }
 
 .menu .menu-item:hover{
-  background: #343434;
+	background: #343434;
 }
 
 .click-container-message{
@@ -182,7 +182,7 @@ body{
 
 .timer{
 	position: fixed;
-	z-index: 1000;
+	z-index: 200;
 	transition: all 0.6s ease 0s;
 	bottom: 20px;
 	left: -110%;
@@ -200,4 +200,38 @@ body{
 
 .timer.active{
 	left: 20px;
+}
+
+.custom-message{
+	position: fixed;
+	right: 20px;
+	background: #1b1a1a;
+	color: #eee;
+	z-index: 200;
+	transition: all 0.6s ease 0s;
+	font-size: 18px;
+	padding: 10px;
+	border-radius: 6px;
+}
+
+.custom-message__quote{
+	margin-bottom: 7px;
+}
+
+.custom-message__author{
+	color: #48C9B0;
+	font-style: italic;
+	font-size: 15px;
+	text-align: right;
+}
+
+.custom-message.first{
+	box-shadow: 0px 0px 5px 5px green;
+	bottom: 20px;
+}
+.custom-message.second{
+	box-shadow: 0px 0px 5px 5px yellow;
+}
+.custom-message.third{
+	box-shadow: 0px 0px 5px 5px red;
 }
