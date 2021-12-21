@@ -46,44 +46,33 @@ export class CustomMessageModule extends Module{
 			}
 		})
 		const idIntervalEl = setInterval(() => {
-			const indexElement = this.arrayCallStack.findIndex((item) => {
-				const valueAttrib = Number(item.getAttribute("id"))
-				if (valueAttrib === value) {
-					return item
-				}
-				return null
-			})
+			const getAttributeId = element => Number(element.getAttribute("id"))
+			const indexElement = this.arrayCallStack.findIndex((item) => (getAttributeId(item) === value))
 			let valueStep
 			if (this.arrayCallStack[indexElement]) {
 				valueStep = this.arrayCallStack[indexElement].getAttribute("data-step")
 			} else {
 				clearInterval(idIntervalEl)
 			}
+			const doStep = (oldClass, newClass, bottomMargin, valueAttrib) => {
+				messageWrap.classList.remove(oldClass)
+				messageWrap.classList.add(newClass)
+				messageWrap.style.bottom = bottomMargin
+				messageWrap.setAttribute("data-step", valueAttrib)
+			}
 			if (indexElement === 0 || valueStep === null) {
-				messageWrap.classList.remove("first")
-				messageWrap.classList.add("second")
-				messageWrap.style.bottom = bottomSecond
-				messageWrap.setAttribute("data-step", 1)
+				doStep("first", "second", bottomSecond, 1)
 			}
 			if (indexElement === 1 || valueStep === "1") {
-				messageWrap.classList.remove("second")
-				messageWrap.classList.add("third")
-				messageWrap.style.bottom = bottomThird
-				messageWrap.setAttribute("data-step", 2)
+				doStep("second", "third", bottomThird, 2)
 			}
 			if (indexElement === 2 || valueStep === "2") {
 				messageWrap.remove()
 				clearInterval(idIntervalEl)
-				const newArray = this.arrayCallStack.filter((item) => {
-					const valueAttrib = Number(item.getAttribute("id"))
-					if (value !== valueAttrib) {
-						return item
-					}
-					return null
-				})
+				const newArray = this.arrayCallStack.filter((item) => (value !== getAttributeId(item)))
 				this.arrayCallStack = newArray
 			}
-		}, 3000)
+		}, 2000)
 	}
 	toHTML() {
 		return super.toHTML()
