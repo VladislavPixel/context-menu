@@ -1,9 +1,10 @@
 import { Module } from "../core/module"
 
 export class TimerModule extends Module{
+	#timeInSeconds
 	constructor(type, text) {
 		super(type, text)
-		this.timeInSeconds
+		this.#timeInSeconds
 	}
 	#createElement(type, classes) {
 		const element = document.createElement(type)
@@ -34,7 +35,7 @@ export class TimerModule extends Module{
 		modalContainer.append(close, form)
 		modalWrap.append(modalContainer)
 		body.append(modalWrap)
-		if (this.timeInSeconds === undefined) {
+		if (this.#timeInSeconds === undefined) {
 			button.classList.add("close")
 		}
 		function removeModal() {
@@ -43,16 +44,16 @@ export class TimerModule extends Module{
 		close.addEventListener("click", removeModal)
 		input.addEventListener("input", ({ target }) => {
 			if (target.value[0] !== "0") {
-				this.timeInSeconds = target.value
+				this.#timeInSeconds = target.value
 			}
 			if (target.value[0] === "0") {
 				validationMessage.classList.add("active")
 			}
-			if (this.timeInSeconds === "") {
+			if (this.#timeInSeconds === "") {
 				validationMessage.classList.remove("active")
-				this.timeInSeconds = undefined
+				this.#timeInSeconds = undefined
 			}
-			if (this.timeInSeconds !== undefined && this.timeInSeconds !== "") {
+			if (this.#timeInSeconds !== undefined && this.#timeInSeconds !== "") {
 				button.classList.remove("close")
 			} else {
 				button.classList.add("close")
@@ -60,21 +61,21 @@ export class TimerModule extends Module{
 		})
 		button.addEventListener("click", (event) => {
 			target.classList.add("active")
-			if (this.timeInSeconds.includes(".")) {
-				this.timeInSeconds = this.timeInSeconds.replaceAll(".", "")
+			if (this.#timeInSeconds.includes(".")) {
+				this.#timeInSeconds = this.#timeInSeconds.replaceAll(".", "")
 			}
 			removeModal()
-			modalTimer.innerHTML = `Обратный отсчет таймера сейчас начнется: <span>Позиция start ${this.timeInSeconds}</span>`
+			modalTimer.innerHTML = `Обратный отсчет таймера сейчас начнется: <span>Позиция start ${this.#timeInSeconds}</span>`
 			body.append(modalTimer)
 			setTimeout(() => {
 				modalTimer.classList.add("active")
 			}, 1000)
 			setTimeout(() => {
-				this.timeInSeconds = Number(this.timeInSeconds) // we know that the "-" sign converts to a number, but we do explicit conversions to control
+				this.#timeInSeconds = Number(this.#timeInSeconds) // we know that the "-" sign converts to a number, but we do explicit conversions to control
 				const idInterval = setInterval(() => {
-					modalTimer.innerHTML = `Обратный отсчет таймера: <span>${this.timeInSeconds}</span>`
-					this.timeInSeconds = this.timeInSeconds - 1
-					if (this.timeInSeconds < 0) {
+					modalTimer.innerHTML = `Обратный отсчет таймера: <span>${this.#timeInSeconds}</span>`
+					this.#timeInSeconds = this.#timeInSeconds - 1
+					if (this.#timeInSeconds < 0) {
 						modalTimer.innerHTML = `<span>Таймер завершился!</span>`
 						clearInterval(idInterval)
 						setTimeout(() => {

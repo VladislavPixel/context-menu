@@ -3,9 +3,10 @@ import { random, correctPosition } from "../utils"
 import configAuxiliary from "../configAuxiliary.json"
 
 export class RandomFigureModule extends Module {
+	#colors
 	constructor(type, text){
 		super(type, text)
-		this.colors = configAuxiliary.arrayColorsFigure
+		this.#colors = configAuxiliary.arrayColorsFigure
 	}
 	trigger(){
 		const body = document.querySelector("body")
@@ -18,10 +19,10 @@ export class RandomFigureModule extends Module {
 		const positionEl = correctPosition(left, top, width, height)
 		figure.style.left = positionEl.correctX + "px"
 		figure.style.top = positionEl.correctY + "px"
-		const colorIndex = random(0, this.colors.length - 1)
-		const shadowIndex = random(0, this.colors.length - 1)
-		figure.style.background = this.colors[colorIndex]
-		figure.style.boxShadow = `0px 0px 5px ${this.colors[shadowIndex]}`
+		const colorIndex = random(0, this.#colors.length - 1)
+		const shadowIndex = random(0, this.#colors.length - 1)
+		figure.style.background = this.#colors[colorIndex]
+		figure.style.boxShadow = `0px 0px 5px ${this.#colors[shadowIndex]}`
 		figure.style.width = width + "px"
 		figure.style.height = height + "px"
 		figure.style.borderRadius = `${random(0, 100)}% ${random(0, 100)}% ${random(0, 100)}% ${random(0, 100)}%`
