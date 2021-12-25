@@ -85,6 +85,11 @@ export class PaintingModule extends Module{
 		sideBarClose.textContent = "Закрыть режим"
 		const widthCanvas = document.body.clientWidth * 80 / 100
 		const heightCanvas = document.body.clientHeight - 150
+		const canvasIcon = this.#createElement("img", "canvas-icon")
+		canvasIcon.setAttribute("src", "./src/paint.svg")
+		canvasIcon.setAttribute("alt", "Иконка палитры")
+		canvasIcon.style.right = (widthCanvas - 30) + "px"
+		canvasIcon.style.top = 110 + "px"
 		const canvas = this.#createElement("canvas", "canvas")
 		canvas.setAttribute("width", widthCanvas)
 		canvas.setAttribute("height", heightCanvas)
@@ -92,11 +97,12 @@ export class PaintingModule extends Module{
 		sideBarContainer.append(sideBarTitle, buttonResetFeather, sideBarList, sideBarClose)
 		sideBar.append(sideBarContainer)
 		header.append(headerContainer)
-		document.body.append(header, sideBar, canvas)
+		document.body.append(header, sideBar, canvas, canvasIcon)
 		setTimeout(() => {
 			header.classList.add("active")
 			sideBar.classList.add("active")
 			canvas.classList.add("active")
+			canvasIcon.classList.add("active")
 		}, 50)
 		const listLiColors = document.querySelectorAll(".row-colors__el")
 		listLiColors.forEach((element, index, arr) => {
@@ -172,6 +178,7 @@ export class PaintingModule extends Module{
 			header.remove()
 			sideBar.remove()
 			canvas.remove()
+			canvasIcon.remove()
 			document.getElementById("menu").classList.remove("plug")
 		})
 		headerColorStok.addEventListener("click", () => {
